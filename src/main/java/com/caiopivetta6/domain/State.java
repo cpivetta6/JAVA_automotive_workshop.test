@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -28,7 +29,7 @@ public class State implements Serializable{
 	private Integer id;
 	private String name;
 	
-	@JsonIgnore
+	@JsonBackReference
 	@OneToMany(mappedBy = "state")
 	private List<City> city = new ArrayList<>();
 	

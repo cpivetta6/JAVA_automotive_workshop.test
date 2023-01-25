@@ -73,10 +73,12 @@ public class AutomotiveWorkshopApplication implements CommandLineRunner{
 		Client client1 = new Client(null, "Roberto Masi", "roberto@gmail.com");
 		Address address1 = new Address(null, "Corso porta nuova","78", "Centro", "123412", city);
 		Car car1 = new Car(null, "Ferrari", 2020, CarType.Supercar);
+		Car car2 = new Car(null, "Lamborghini", 2021, CarType.Supercar);
 		
 		
 		
 		client1.getCars().add(car1);
+		client1.getCars().add(car2);
 		client1.getPhone().add("3421231412");
 		client1.setAddress(address1);
 		client1.setaWregister(register1);
@@ -86,11 +88,12 @@ public class AutomotiveWorkshopApplication implements CommandLineRunner{
 		address1.setClient(client1);
 		
 		car1.setClient(client1);
+		car2.setClient(client1);
 		
 		
 		clientRepository.save(client1);
 		addressRepository.save(address1);
-		carRepository.save(car1);
+		carRepository.saveAll(Arrays.asList(car1,car2));
 		
 		
 		

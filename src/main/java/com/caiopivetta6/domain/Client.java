@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Embedded;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,7 +47,7 @@ public class Client implements Serializable {
 	@ManyToOne
 	private AWregister aWregister;
 	
-	@Embedded
+	@ElementCollection
 	@CollectionTable(name = "phone")
 	private List<String> phone = new ArrayList<>();
 	

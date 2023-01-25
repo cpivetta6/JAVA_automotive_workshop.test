@@ -18,13 +18,16 @@ public class test {
 		
 		Car car1 = new Car(null, "Ferrari", 2020, CarType.Supercar);
 		Client client1 = new Client(null, "Roberto Masi", "roberto@gmail.com");
+		client1.getPhone().add("231231231");
 		
 		AWregister register1 = new AWregister(null, sdf.parse("20/02/2023").toInstant(),sdf.parse("25/02/2023").toInstant(), "Oil Change", 200.0);
 		register1.getClients().add(client1);
 		
 		client1.setaWregister(register1);
 		
+		
 		System.out.println(client1.getaWregister().getPrice());
+		System.out.println(client1.getPhone().toString());
 		
 		
 		

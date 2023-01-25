@@ -33,7 +33,8 @@ public class Address implements Serializable{
 	private String zcode;
 	
 	
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
