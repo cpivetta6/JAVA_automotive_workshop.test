@@ -5,17 +5,30 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "awregister_tb")
 public class AWregister implements Serializable{
 
 	
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Instant deliveryDate;
 	private Instant carleftDate;
 	private String problem;
 	private Double price;
 	
+	@OneToMany(mappedBy = "aWregister")
 	private List<Client> clients;
 	
 	
