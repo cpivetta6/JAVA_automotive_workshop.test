@@ -1,17 +1,24 @@
 package com.caiopivetta6.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.caiopivetta6.domain.enums.CarType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,13 +33,23 @@ public class Client implements Serializable {
 	private Integer id;
 	private String name;
 	private String email;
-	private CarType carType;
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "client")
+	private List<Car> cars = new ArrayList<>();
+	
+	@JsonManagedReference
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
+	private Address address;
+	
+	@JsonBackReference
 	@ManyToOne
 	private AWregister aWregister;
 	
 	@Embedded
-	private List<String> phone;
+	@CollectionTable(name = "phone")
+	private List<String> phone = new ArrayList<>();
 	
 	
 	public Client() {
@@ -40,16 +57,38 @@ public class Client implements Serializable {
 	}
 
 
-	public Client(Integer id, String name, String email, CarType carType) {
+	public Client(Integer id, String name, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.carType = carType;
+		
+	}
+	
+	
+	
+	
+
+	public List<Car> getCars() {
+		return cars;
 	}
 
-	
-	
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
 
 	public AWregister getaWregister() {
 		return aWregister;
@@ -88,16 +127,6 @@ public class Client implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-	public CarType getCarType() {
-		return carType;
-	}
-
-
-	public void setCarType(CarType carType) {
-		this.carType = carType;
 	}
 
 

@@ -3,6 +3,7 @@ package com.caiopivetta6.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -37,6 +38,9 @@ public class Address implements Serializable{
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@JsonBackReference
+	@OneToOne(mappedBy = "address")
+	private Client client;
 	
 	public Address() {
 		
@@ -53,8 +57,16 @@ public class Address implements Serializable{
 	}
 	
 	
-
 	
+	
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	public Integer getId() {
 		return id;

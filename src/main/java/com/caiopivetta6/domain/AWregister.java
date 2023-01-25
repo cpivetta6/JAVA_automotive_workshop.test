@@ -2,8 +2,12 @@ package com.caiopivetta6.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +32,9 @@ public class AWregister implements Serializable{
 	private String problem;
 	private Double price;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "aWregister")
-	private List<Client> clients;
+	private List<Client> clients = new ArrayList<>();
 	
 	
 	public AWregister() {
